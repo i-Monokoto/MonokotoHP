@@ -1,5 +1,5 @@
 export const site = {
-  name: '学会ウェブサイト',
+  name: 'i-ものこと学会',
   description: '',
   membershipForm: '',
   contactForm: '',
