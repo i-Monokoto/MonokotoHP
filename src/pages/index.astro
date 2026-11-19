@@ -1,0 +1,38 @@
+---
+import Site from '../layouts/Site.astro';
+import { site, sitePath } from '../site';
+
+const news = [...site.news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
+---
+<Site>
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="wrap hero-content">
+      <h1>{site.name}</h1>
+      <p>大会・研究会の開催情報と、入会・会則のご案内</p>
+      <a class="button" href={sitePath('events/')}>大会・研究会を見る</a>
+    </div>
+  </section>
+
+  <div class="wrap home-content">
+    <section aria-labelledby="news">
+      <h2 id="news">最新のお知らせ</h2>
+      {news.length ? (
+        <ul class="records">
+          {news.map(({ date, title, text }) => (
+            <li><time datetime={date}>{date}</time><h3>{title}</h3>{text && <p>{text}</p>}</li>
+          ))}
+        </ul>
+      ) : <p class="notice">現在掲載中のお知らせはありません。</p>}
+    </section>
+    <section aria-labelledby="about">
+      <h2 id="about">学会概要</h2>
+      <p>{site.description || '学会の目的・活動概要は準備中です。'}</p>
+      <ul class="directory">
+        <li><a href={sitePath('events/')}>大会・研究会</a><p>開催案内・プログラム</p></li>
+        <li><a href={sitePath('membership/')}>入会案内・会則</a><p>入会申込・会則</p></li>
+        <li><a href={sitePath('contact/')}>役員・お問い合わせ</a><p>役員一覧・お問い合わせ窓口</p></li>
+      </ul>
+    </section>
+  </div>
+</Site>

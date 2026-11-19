@@ -1,0 +1,24 @@
+---
+import Site from '../layouts/Site.astro';
+import { site, sitePath } from '../site';
+---
+<Site title="大会・研究会" current="events/">
+  <div class="page-heading"><div class="wrap"><h1>大会・研究会</h1></div></div>
+  <div class="wrap page-content">
+    <section aria-labelledby="events">
+      <h2 id="events">開催案内・プログラム</h2>
+      {site.events.length ? (
+        <ul class="records">
+          {site.events.map(({ title, date, venue, description, programPdf }) => (
+            <li>
+              <h3>{title}</h3>
+              <dl class="event-details"><dt>開催日</dt><dd>{date}</dd><dt>会場</dt><dd>{venue}</dd></dl>
+              {description && <p>{description}</p>}
+              {programPdf ? <a href={sitePath(programPdf)}>プログラム（PDF）</a> : <p>プログラムは準備中です。</p>}
+            </li>
+          ))}
+        </ul>
+      ) : <p class="notice">現在掲載中の開催案内はありません。</p>}
+    </section>
+  </div>
+</Site>

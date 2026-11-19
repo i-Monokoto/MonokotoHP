@@ -1,0 +1,42 @@
+---
+import { navigation, site, sitePath } from '../site';
+import '../styles/site.css';
+
+interface Props {
+  title?: string;
+  current?: string;
+}
+
+const { title, current = '' } = Astro.props;
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={site.description || '学会の大会・研究会、入会、会則、お問い合わせのご案内。'} />
+    <title>{title ? `${title} | ${site.name}` : site.name}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header class="header">
+      <div class="wrap header-inner">
+        <a class="brand" href={sitePath()}>{site.name}</a>
+        <nav aria-label="メインナビゲーション">
+          {navigation.map(({ path, label }) => (
+            <a href={sitePath(path)} aria-current={current === path ? 'page' : undefined}>{label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <span>{site.name}</span>
+        <a href={sitePath('contact/#inquiries')}>お問い合わせ</a>
+      </div>
+    </footer>
+  </body>
+</html>

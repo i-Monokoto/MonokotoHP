@@ -1,0 +1,23 @@
+---
+import Site from '../layouts/Site.astro';
+import { site } from '../site';
+---
+<Site title="役員・お問い合わせ" current="contact/">
+  <div class="page-heading"><div class="wrap"><h1>役員・お問い合わせ</h1></div></div>
+  <div class="wrap page-content">
+    <section aria-labelledby="officers">
+      <h2 id="officers">役員一覧</h2>
+      {site.officers.length ? (
+        <dl class="officers">
+          {site.officers.map(({ role, name, affiliation }) => (
+            <div><dt>{role}</dt><dd>{name}{affiliation && <span>（{affiliation}）</span>}</dd></div>
+          ))}
+        </dl>
+      ) : <p class="notice">役員一覧は準備中です。</p>}
+    </section>
+    <section aria-labelledby="inquiries">
+      <h2 id="inquiries">お問い合わせ</h2>
+      {site.contactForm ? <a class="button" href={site.contactForm}>お問い合わせフォーム（Googleフォーム）</a> : <p class="notice">お問い合わせフォームは準備中です。</p>}
+    </section>
+  </div>
+</Site>

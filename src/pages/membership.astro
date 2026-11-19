@@ -1,0 +1,17 @@
+---
+import Site from '../layouts/Site.astro';
+import { site, sitePath } from '../site';
+---
+<Site title="入会案内・会則" current="membership/">
+  <div class="page-heading"><div class="wrap"><h1>入会案内・会則</h1></div></div>
+  <div class="wrap page-content">
+    <section aria-labelledby="membership">
+      <h2 id="membership">入会申込</h2>
+      {site.membershipForm ? <a class="button" href={site.membershipForm}>入会申込フォーム（Googleフォーム）</a> : <p class="notice">入会申込フォームは準備中です。</p>}
+    </section>
+    <section aria-labelledby="bylaws">
+      <h2 id="bylaws">会則</h2>
+      {site.bylawsPdf ? <a href={sitePath(site.bylawsPdf)}>会則を読む（PDF）</a> : <p class="notice">会則は準備中です。</p>}
+    </section>
+  </div>
+</Site>
